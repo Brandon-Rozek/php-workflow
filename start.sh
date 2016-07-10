@@ -3,10 +3,9 @@
 trap killgroup SIGINT
 
 SCSSFILE=src/scss/style.scss
-TSFILE=src/ts/script.ts
 
-CSSOUTFILE=bin/style.css
-JSOUTFILE=bin/script.js
+CSSOUTFILE=bin/css/style.css
+JSFILES=bin/js/*.js
 
 HTTPSPORT=8443
 HTTPPORT=8080
@@ -36,11 +35,11 @@ installbrowsersync() {
 	fi
 }
 
-installtypescript() {
-	#If npm is installed then install TypeScript
+installjshint() {
+	#If npm is installed then install JSHint
 	if command -v npm > /dev/null; then
-		echo "Installing TypeScript"
-		npm install -g typescript
+		echo "Installing JSHint"
+		npm install -g jshint
 	else
 		echo "npm is not installed"
 	fi
@@ -68,14 +67,15 @@ startsassc() {
 	fi
 }
 
-# Watches tts files and compiles to js when changed
-starttypescript() {
-	if command -v tsc > /dev/null; then
-		./watch.sh --no-clear $TSFILE "tsc $TSFILE --outFile \"$JSOUTFILE\"" >> error.log
+# Watches js files and lints when changed
+startjshint() {
+	if command -v jshint > /dev/null; then
+		./watch.sh --no-clear $JSFILES "jshint $JSFILES >> error.log"
 	else
-		echo "TypeScript is not installed"
+		echo "JSHint is not installed"
 	fi
 }
+
 
 # Starts up docker instance with apache and php installed (serves the bin folder)
 startdocker() {
@@ -97,13 +97,13 @@ if ! command -v browser-sync > /dev/null; then
 	installbrowsersync
 fi
 
-# Install TypeScript if it doesn't exist
-if ! command -v tsc > /dev/null; then
-	installtypescript
+# Install JSHint if it doesn't exist
+if ! command -v jshint > /dev/null; then
+	installjshint
 fi
 
 
-startdocker && (startbrowsersync & startsassc & starttypescript &
+startdocker && (startbrowsersync & startsassc & startjshint &
 
 # Output all future errors
 tail -f -n 0 error.log)

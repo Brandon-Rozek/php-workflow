@@ -20,10 +20,10 @@ Browsersync [1]
 	Website: https://www.browsersync.io/
 	Install: npm install -g browser-sync
 
-TypeScript [1]
-	Purpose: Type checking and compilation to js
-	Website: http://www.typescriptlang.org/
-	Install: npm install -g typescript
+JSHint [1]
+	Purpose: JS Syntax Checking
+	Website: http://jshint.com/
+	Install: npm install -g jshint
 
 Docker
 	Purpose: Apache-PHP5 server
