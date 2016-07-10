@@ -1,0 +1,41 @@
+Front End Development Setup
+Author: Brandon Rozek
+
+------------------
+Dependencies
+
+Bash
+
+SassC
+	Purpose: Sass compilation to css
+	Website: https://github.com/sass/sassc/
+
+nodejs
+	Purpose: Test Runner
+	Website: https://nodejs.org/en/
+	Install: https://nodejs.org/en/download/
+
+Browsersync [1]
+	Purpose: Live-reload
+	Website: https://www.browsersync.io/
+	Install: npm install -g browser-sync
+
+TypeScript [1]
+	Purpose: Type checking and compilation to js
+	Website: http://www.typescriptlang.org/
+	Install: npm install -g typescript
+
+Docker
+	Purpose: Apache-PHP5 server
+	Website: http://www.docker.com/
+
+[1] -- Will install automatically if npm is installed
+-----------------
+
+Don't forget to "rm -rf .git" when starting a new project 
+
+To run: Open up the terminal to this directory and type './start.sh'
+
+For tests: Open up the terminal to this directory and type './test.sh'
+
+Error messages are stored in error.log
