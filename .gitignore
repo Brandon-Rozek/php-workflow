@@ -1,2 +1,3 @@
 bin/css/*
 src/scss/normalize.scss
+error.log
