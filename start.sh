@@ -17,9 +17,9 @@ killgroup() {
 	echo ""
 	if $DOCKERENABLED; then
 		echo "Shutting down docker image"
-		docker stop development
+		sudo docker stop development
 		echo "Removing docker image"
-		docker rm development
+		sudo docker rm development
 	fi
 	echo "Killing background jobs"
 	kill -9 $(jobs -p)
@@ -29,7 +29,7 @@ installbrowsersync() {
 	#If npm is installed then install BrowserSync
 	if command -v npm > /dev/null; then
 		echo "Installing BrowserSync"
-		npm install -g browser-sync
+		sudo npm install -g browser-sync
 	else
 		echo "npm is not installed"
 	fi
@@ -39,7 +39,7 @@ installjshint() {
 	#If npm is installed then install JSHint
 	if command -v npm > /dev/null; then
 		echo "Installing JSHint"
-		npm install -g jshint
+		sudo npm install -g jshint
 	else
 		echo "npm is not installed"
 	fi
@@ -80,7 +80,7 @@ startjshint() {
 # Starts up docker instance with apache and php installed (serves the bin folder)
 startdocker() {
 	if command -v docker > /dev/null; then
-		docker run -p $HTTPPORT:80 -p $HTTPSPORT:443 --name development -v "$PWD/"bin/:/var/www/html/ -d eboraas/apache-php 2>> error.log
+		sudo docker run -p $HTTPPORT:80 -p $HTTPSPORT:443 --name development -v "$PWD/"bin/:/var/www/html/ -d eboraas/apache-php 2>> error.log
 		DOCKERENABLED=true
 	else
 		echo "Docker is not installed"
